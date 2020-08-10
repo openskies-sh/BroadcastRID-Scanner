@@ -19,27 +19,19 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/statusTextView1"
+        android:id="@+id/wifiAwareState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="227dp" />
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="237dp" />
 
     <TextView
-        android:id="@+id/statusTextView3"
+        android:id="@+id/wifiAwareReceivedMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="319dp" />
-
-    <TextView
-        android:id="@+id/statusTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="272dp" />
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="282dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.wifi.aware.WifiAwareManager;
 import android.provider.Settings;
 import androidx.core.content.ContextCompat;
-import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -48,22 +48,27 @@ public class MainActivity extends AppCompatActivity {
 
         // Create WiFiAwareManager object
         WifiAwareManager wifiAwareManager = (WifiAwareManager)getSystemService(Context.WIFI_AWARE_SERVICE);
+        // Constant values of WifiAwareManager
+        String state_change = WifiAwareManager.ACTION_WIFI_AWARE_STATE_CHANGED;
+        int data_init = WifiAwareManager.WIFI_AWARE_DATA_PATH_ROLE_INITIATOR;
+        int data_resp = WifiAwareManager.WIFI_AWARE_DATA_PATH_ROLE_RESPONDER;
 
         // Create TextView objects to display status
-        TextView status1 = (TextView) findViewById(R.id.statusTextView1);
-        TextView status2 = (TextView) findViewById(R.id.statusTextView2);
-        TextView status3 = (TextView) findViewById(R.id.statusTextView3);
+        TextView status1 = (TextView) findViewById(R.id.wifiAwareState);
+        TextView status2 = (TextView) findViewById(R.id.wifiAwareReceivedMessage);
+
+
+
 
         // Check if WiFi Aware is available
         boolean awareAvailable = wifiAwareManager.isAvailable();
         if (awareAvailable) {
             status1.setText("Wifi Aware Available");
-            status2.setText("Searching for");
-            status3.setText("Publishers...");
+            status2.setText("Searching for Publishers");
         } else {
             status1.setText("Wifi Aware");
-            status2.setText("Not Available");
-            status3.setText("Please Turn on WiFi");
+            status2.setText("Not Available, please Turn on WiFi");
+
         }
 
         // Start WiFi Aware
@@ -75,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
     public void showMessageReceived(View view) {
 
         // Create TextView objects to display status
-        TextView status1 = (TextView) findViewById(R.id.statusTextView1);
-        TextView status2 = (TextView) findViewById(R.id.statusTextView2);
-        TextView status3 = (TextView) findViewById(R.id.statusTextView3);
+        TextView status1 = (TextView) findViewById(R.id.wifiAwareState);
+        TextView status2 = (TextView) findViewById(R.id.wifiAwareReceivedMessage);
+
 
         if (mainAttachCallback.getMessageReceived() == null) {
             //do nothing
@@ -87,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             String messageReceived = new String(mainAttachCallback.getMessageReceived());
             status1.setText("Message Received");
             status2.setText(" ' " + messageReceived + " ' ");
-            status3.setText("");
+
         }
     }
 
