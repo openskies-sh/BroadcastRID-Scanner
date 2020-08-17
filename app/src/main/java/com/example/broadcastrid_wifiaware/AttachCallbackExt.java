@@ -21,10 +21,12 @@ import java.util.List;
 public class AttachCallbackExt extends AttachCallback {
 
     // Variables
-    private static final String AWARE_FILE_SHARE_SERVICE_NAME = "WiFiAwareTest"; // Name for publish service
+    private static final String AWARE_FILE_SHARE_SERVICE_NAME = "RemoteIDTest"; // Name for subscribe service
     private byte [] messageReceived = null;
+    private MainActivity mActivity;
 
-    public AttachCallbackExt() {
+    public AttachCallbackExt(Context activity) {
+        this.mActivity = (MainActivity) activity;
         Log.d("Object Created", "AttachCallback object created");
     }
 

@@ -22,36 +22,43 @@
         android:id="@+id/wifiAwareState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="237dp" />
+        android:layout_marginTop="237dp"
+        android:text=""
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="18dp" />
 
     <TextView
         android:id="@+id/wifiAwareReceivedMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="282dp" />
+        android:layout_marginTop="282dp"
+        android:text=""
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="19dp" />
 
-    <TextView
-        android:id="@+id/timerHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Timer"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="374dp" />
+    <Button
 
-    <TextView
-        android:id="@+id/time_view"
+        android:id="@+id/start_logging_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="time"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="429dp" />
 
+        android:layout_marginTop="324dp"
+        android:onClick="onClickStart"
+        android:text="Start Logging"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+
+        android:id="@+id/stop_logging_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="324dp"
+        android:onClick="onClickStop"
+        android:text="Stop Logging"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="168dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
