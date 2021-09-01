@@ -3,6 +3,8 @@ package com.example.broadcastrid_wifiaware;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.IntentFilter;
+import android.net.wifi.aware.PeerHandle;
+import android.net.wifi.aware.SubscribeDiscoverySession;
 import android.os.Bundle;
 import android.Manifest;
 import android.content.Context;
@@ -21,18 +23,20 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     //Variables
-    AttachCallbackExt mainAttachCallback = new AttachCallbackExt(this);
-
+    AttachCallbackExt mainAttachCallback = new AttachCallbackExt();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button start_logging_button = (Button) findViewById(R.id.start_logging_button);
-        final Button stop_logging_button  = (Button) findViewById(R.id.stop_logging_button);
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
 
-
-        IntentFilter filter =  new IntentFilter(WifiAwareManager.ACTION_WIFI_AWARE_STATE_CHANGED);
+        //final Button start_logging_button = (Button) findViewById(R.id.start_logging_button);
+        //final Button stop_logging_button = (Button) findViewById(R.id.stop_logging_button);
 
         // Check whether or not device supports WiFi Aware and display status as Toast message
         boolean hasWiFiAware = getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_AWARE);
@@ -41,51 +45,48 @@ public class MainActivity extends AppCompatActivity {
 
         if (hasWiFiAware) {
             hasAware.show();
-            registerReceiver(myReceiver, filter);
-
         } else {
-        noAware.show();
-        start_logging_button.setVisibility(View.GONE);
-        stop_logging_button.setVisibility(View.GONE);
+            noAware.show();
+            //start_logging_button.setVisibility(View.GONE);
+            //stop_logging_button.setVisibility(View.GONE);
         }
+
     }
 
 
-    BroadcastReceiver myReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-        }
-
-    };
-    public void subscribe(View view) {
-
+    public void subscribe_messages(View view) {
+        Context context = null;
         // Create WiFiAwareManager object
-
         WifiAwareManager wifiAwareManager = (WifiAwareManager)getSystemService(Context.WIFI_AWARE_SERVICE);
-        // Constant values of WifiAwareManager
-        String state_change = WifiAwareManager.ACTION_WIFI_AWARE_STATE_CHANGED;
-        int data_init = WifiAwareManager.WIFI_AWARE_DATA_PATH_ROLE_INITIATOR;
-        int data_resp = WifiAwareManager.WIFI_AWARE_DATA_PATH_ROLE_RESPONDER;
-
         // Create TextView objects to display status
         TextView status1 = (TextView) findViewById(R.id.wifiAwareState);
         TextView status2 = (TextView) findViewById(R.id.wifiAwareReceivedMessage);
-
         // Check if WiFi Aware is available
+        IntentFilter filter = new IntentFilter(WifiAwareManager.ACTION_WIFI_AWARE_STATE_CHANGED);
+
+        BroadcastReceiver myReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Toast.makeText(context, "Receiving", Toast.LENGTH_LONG).show();
+                // Create TextView objects to display status
+            }
+        };
+        registerReceiver(myReceiver, filter);
+
         boolean awareAvailable = wifiAwareManager.isAvailable();
         if (awareAvailable) {
             status1.setText("Wifi Aware Available");
-            status2.setText("Searching for Publishers");
+            status2.setText("Searching for Publishers...");
         } else {
             status1.setText("Wifi Aware");
-            status2.setText("Not Available, please Turn on WiFi");
-
+            status2.setText("Not Available, please turn on WiFi");
         }
 
         // Start WiFi Aware
-        AttachCallbackExt attachCallback = new AttachCallbackExt(this);
+        AttachCallbackExt attachCallback = new AttachCallbackExt();
         wifiAwareManager.attach(attachCallback, null);
         mainAttachCallback = attachCallback;
+
     }
 
     public void showMessageReceived(View view) {
@@ -106,11 +107,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-    public void stopPublish(View view) {
+    public void stop_receiving(View view) {
         Toast endService = Toast.makeText(this, "Subscriber Service Ended", Toast.LENGTH_LONG);
         endService.show();
         finish();
-        System.exit(1);
+//        System.exit(1);
     }
+  
 }

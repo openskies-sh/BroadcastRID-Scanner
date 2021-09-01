@@ -12,7 +12,7 @@
         android:text="Broadcast Remote ID Scanner"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,11 +43,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
 
+        android:layout_marginStart="16dp"
         android:layout_marginTop="324dp"
-        android:onClick="onClickStart"
+        android:onClick="subscribe_messages"
         android:text="Start Logging"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
 
@@ -55,10 +56,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="168dp"
         android:layout_marginTop="324dp"
-        android:onClick="onClickStop"
+        android:onClick="stop_receiving"
         android:text="Stop Logging"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="168dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

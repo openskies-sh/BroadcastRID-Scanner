@@ -1,7 +1,6 @@
 package com.example.broadcastrid_wifiaware;
 
 import android.annotation.TargetApi;
-
 import android.content.Context;
 import android.net.wifi.aware.AttachCallback;
 import android.net.wifi.aware.DiscoverySessionCallback;
@@ -10,7 +9,6 @@ import android.net.wifi.aware.PublishConfig;
 import android.net.wifi.aware.PublishDiscoverySession;
 import android.net.wifi.aware.SubscribeConfig;
 import android.net.wifi.aware.SubscribeDiscoverySession;
-import android.net.wifi.aware.WifiAwareManager;
 import android.net.wifi.aware.WifiAwareSession;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
@@ -21,12 +19,10 @@ import java.util.List;
 public class AttachCallbackExt extends AttachCallback {
 
     // Variables
-    private static final String AWARE_FILE_SHARE_SERVICE_NAME = "RemoteIDTest"; // Name for subscribe service
+    private static final String AWARE_FILE_SHARE_SERVICE_NAME = "WiFiAwareTest"; // Name for publish service
     private byte [] messageReceived = null;
-    private MainActivity mActivity;
 
-    public AttachCallbackExt(Context activity) {
-        this.mActivity = (MainActivity) activity;
+    public AttachCallbackExt() {
         Log.d("Object Created", "AttachCallback object created");
     }
 
